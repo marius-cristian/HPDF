@@ -200,8 +200,6 @@ instance Monad Draw where
                           unDraw (f a) env
     return x = Draw $ \_env -> return x
     fail     = Fail.fail
-instance Fail.MonadFail Draw where
-  fail s = Draw $ \_ -> Fail.fail s
 
 #if MIN_VERSION_base(4,11,0)
 instance Fail.MonadFail Draw where
