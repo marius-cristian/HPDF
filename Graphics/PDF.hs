@@ -64,6 +64,7 @@ module Graphics.PDF
   , module Graphics.PDF.Typesetting
   , module Graphics.PDF.Hyphenate
   , flushDraw
+  , eToPDFString
   ) where
 
 #if !MIN_VERSION_base(4,8,0)
@@ -101,6 +102,8 @@ import qualified Data.Text as T
 import Graphics.PDF.Fonts.Font 
 import Graphics.PDF.Fonts.StandardFont
 import Graphics.PDF.Fonts.Type1
+
+eToPDFString = toPDFString
 
 -- | Create a new PDF document and return a first page
 -- The page is using the document size by default

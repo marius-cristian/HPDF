@@ -95,6 +95,7 @@ import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Builder as BB
 
 import Control.Monad.ST
+import qualified Control.Monad.Fail as Fail
 import Data.STRef
 
 import Control.Monad.Writer.Class
@@ -195,6 +196,9 @@ instance Monad Draw where
                           a <- unDraw m env
                           unDraw (f a) env
     return x = Draw $ \_env -> return x
+    fail     = Fail.fail
+instance Fail.MonadFail Draw where
+  fail = error
 
 instance MonadReader DrawEnvironment Draw where
    ask       = Draw $ \env -> return (drawEnvironment env)
