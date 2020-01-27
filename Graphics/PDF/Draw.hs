@@ -198,7 +198,7 @@ instance Monad Draw where
     return x = Draw $ \_env -> return x
     fail     = Fail.fail
 instance Fail.MonadFail Draw where
-  fail = error
+  fail s = Draw $ \_ -> Fail.fail s
 
 instance MonadReader DrawEnvironment Draw where
    ask       = Draw $ \env -> return (drawEnvironment env)
