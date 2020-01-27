@@ -87,6 +87,9 @@ import Data.Maybe
 #if !MIN_VERSION_base(4,8,0)
 import Data.Monoid
 #endif
+#if MIN_VERSION_base(4,11,0)
+import qualified Control.Monad.Fail as Fail
+#endif
 
 import qualified Data.Map.Strict as M
 import qualified Data.IntMap as IM
@@ -199,6 +202,11 @@ instance Monad Draw where
     fail     = Fail.fail
 instance Fail.MonadFail Draw where
   fail s = Draw $ \_ -> Fail.fail s
+
+#if MIN_VERSION_base(4,11,0)
+instance Fail.MonadFail Draw where
+    fail s = Draw $ \_ -> Fail.fail s
+#endif
 
 instance MonadReader DrawEnvironment Draw where
    ask       = Draw $ \env -> return (drawEnvironment env)
